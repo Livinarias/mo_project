@@ -1,11 +1,13 @@
-from typing import ByteString
 from django.http.response import HttpResponse
 from django.shortcuts import render
+
 from .modules.upload_file import UploadFileForm
 from .strategy.context.strategy_context import Context
 from .strategy.strategy_csv import ConcreteStrategyCSV
 from .strategy.strategy_txt import ConcreteStrategyTXT
 from .enums.custumers_enums import ExtensionFiles
+
+from typing import ByteString
 
 
 # Create your views here.
