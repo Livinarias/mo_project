@@ -21,7 +21,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from apps.customers_customer.views import upload_file
+from apps.customers.views import upload_file
 
 
 urlpatterns = [
@@ -29,5 +29,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('customer/create_with_csv/', upload_file, name='Create Customer'),
-    path('customer/',include('apps.customers_customer.api.urls')),
+    path('customer/',include('apps.customers.api.urls')),
 ]
