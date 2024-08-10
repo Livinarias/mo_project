@@ -28,7 +28,8 @@ BASE_APPS = [
 ]
 
 LOCAL_APPS = [
-    'apps.customers_customer',
+    'apps.customers',
+    'apps.loans',
 ]
 
 THIRD_APPS = [
