@@ -30,4 +30,5 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('customer/create_with_csv/', upload_file, name='Create Customer'),
     path('customer/',include('apps.customers.api.urls')),
+    path('loan/',include('apps.loans.api.urls')),
 ]
