@@ -1,6 +1,6 @@
 from django.db import models
-from apps.customers.models import Customers
 from simple_history.models import HistoricalRecords
+from apps.customers.models import Customers
 
 
 # Create your models here.
