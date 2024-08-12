@@ -4,30 +4,33 @@ from rest_framework import status
 
 from apps.loans.models import Loans
 from apps.loans.api.serializers import LoansSerializer, LoansSerializerPost
+from apps.utils.search_util import find_customer_by_external_id
 
 @api_view(['GET', 'POST'])
 def create_loans_api_view(request):
 
     if request.method == 'GET':
-        customers = Loans.objects.all()
-        customers_serializer = LoansSerializer(customers, many=True)
-        return Response(customers_serializer.data, status=status.HTTP_200_OK)
+        loans = Loans.objects.all()
+        print("loans:", loans)
+        loans_serializer = LoansSerializer(loans, many=True)
+        print("loans_serializer:", loans_serializer)
+        return Response(loans_serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'POST':
-        data = {**request.data, 'status': 2}
+        data = {**request.data, 'status': 1}
         print("request data:", data)
-        customers_serializer = LoansSerializerPost(data = data)
-        if customers_serializer.is_valid():
+        loans_serializer = LoansSerializerPost(data = data)
+        if loans_serializer.is_valid():
             print("serializer valid")
-            customers_serializer.save()
-            return Response(customers_serializer.data, status=status.HTTP_201_CREATED)
-        return Response(customers_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            loans_serializer.save()
+            return Response(loans_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(loans_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def get_loan_by_customer_view(request, pk):
 
     if request.method == 'GET':
-        print("request method:", request)
-        customer = Loans.objects.get(customer_id=pk)
-        customer_serializer = LoansSerializer(customer)
-        return Response(customer_serializer.data, status=status.HTTP_200_OK)
+        customer_id = find_customer_by_external_id({'customer_external_id': pk}, 'customer_external_id')
+        loan = Loans.objects.filter(customer_id=customer_id)
+        loan_serializer = LoansSerializer(loan, many=True)
+        return Response(loan_serializer.data, status=status.HTTP_200_OK)

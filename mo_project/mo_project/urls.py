@@ -31,4 +31,5 @@ urlpatterns = [
     path('customer/create_with_csv/', upload_file, name='Create Customer'),
     path('customer/',include('apps.customers.api.urls')),
     path('loan/',include('apps.loans.api.urls')),
+    path('payment/',include('apps.payments.api.urls')),
 ]
