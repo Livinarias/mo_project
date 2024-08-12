@@ -26,6 +26,18 @@ def find_customer_by_external_id(data, variable_search) -> Customers | None:
         print("Customer not found")
         return None
 
+def find_total_debt(validated_data):
+    """method to return total debt"""
+    try:
+        loans = Loans.objects.\
+            filter(
+                customer_id=validated_data['id'],
+                status__in=[1, 2]
+            )
+        return sum([item.outstanding for item in loans])
+    except Loans.DoesNotExist:
+        print("Customer not found")
+        return None
 
 """Utilitys to module Loans"""
 
