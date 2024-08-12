@@ -13,17 +13,13 @@ def create_loans_api_view(request):
 
     if request.method == 'GET':
         loans = Loans.objects.all()
-        print("loans:", loans)
         loans_serializer = LoansSerializer(loans, many=True)
-        print("loans_serializer:", loans_serializer)
         return Response(loans_serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'POST':
         data = {**request.data, 'status': 1}
-        print("request data:", data)
         loans_serializer = LoansSerializerPost(data = data)
         if loans_serializer.is_valid():
-            print("serializer valid")
             loans_serializer.save()
             return Response(loans_serializer.data, status=status.HTTP_201_CREATED)
         return Response(loans_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
