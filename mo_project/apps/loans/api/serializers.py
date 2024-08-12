@@ -39,7 +39,9 @@ class LoansSerializerPost(serializers.ModelSerializer):
         print("create: ", validated_data)
         customer_id = find_customer_by_external_id(validated_data, 'customer_external_id')
         validated_data.pop('customer_external_id')
-        validated_data = {**validated_data, 'customer_id': customer_id}
-        loan_record = Loans.objects.create(**validated_data)
-        loan_record.save()
-        return loan_record
+        if customer_id.score >= validated_data['amount']:
+            validated_data = {**validated_data, 'customer_id': customer_id}
+            loan_record = Loans.objects.create(**validated_data)
+            loan_record.save()
+            return loan_record
+        raise serializers.ValidationError("Insufficient funds")

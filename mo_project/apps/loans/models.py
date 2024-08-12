@@ -13,7 +13,7 @@ class Loans(models.Model):
     status = models.SmallIntegerField(blank=False, null=False)
     contract_version = models.CharField(max_length=60, blank=True, null=True)
     maximum_payment_date = models.DateTimeField(blank=True, auto_now=True)
-    taken_at = models.DateTimeField(blank=True, auto_now=True)
+    taken_at = models.DateTimeField(blank=True)
     outstanding = models.FloatField(blank=False)
     customer_id = models.ForeignKey(Customers, on_delete=models.CASCADE, verbose_name='Customer', null=False)
     historical = HistoricalRecords()
