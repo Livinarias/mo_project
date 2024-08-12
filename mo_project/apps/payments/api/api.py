@@ -26,7 +26,7 @@ def create_payments_api_view(request):
 def get_payment_by_customer_view(request, pk):
 
     if request.method == 'GET':
-        customer_id = find_customer_by_external_id({'“loan_external_id”': pk}, '“loan_external_id”')
+        customer_id = find_customer_by_external_id({'external_id': pk}, 'external_id')
         payment = Payments.objects.filter(customer_id=customer_id)
         payment_serializer = PaymentSerializer(payment, many=True)
         return Response(payment_serializer.data, status=status.HTTP_200_OK)

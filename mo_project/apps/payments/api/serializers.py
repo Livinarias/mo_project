@@ -3,7 +3,7 @@ from rest_framework import serializers
 from apps.payments.models import Payments, PaymentsDetails
 from apps.utils.search_util import (
     find_customer_variable_by_id,
-    find_loan_by_external_id,
+    find_payment_details_by_payment_id,
     find_customer_by_external_id,
     validate_amout_payment,
     update_status_payment,
@@ -27,11 +27,7 @@ class PaymentSerializer(serializers.ModelSerializer):
                 'customer_id',
                 'external_id'
             ),
-            'loan_external_id': find_loan_by_external_id(
-                data, 'customer_id').external_id,
-            'payment_date': data['paid_at'],
-            'total_amount': data['total_amount'],
-            'payment_amount': 0  # FIXME: find_payment_detail_variable_by_payment_id
+            "loans": find_payment_details_by_payment_id(data, 'id')
         }
         return data
 

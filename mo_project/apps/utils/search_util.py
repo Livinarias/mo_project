@@ -30,14 +30,26 @@ def find_customer_by_external_id(data, variable_search) -> Customers | None:
 """Utilitys to module Loans"""
 
 
-def find_loan_by_external_id(data, variable_search) -> Loans | None:
+def find_payment_details_by_payment_id(data, variable_search) -> list[dict]:
     """method to return instance to loan filter by external id"""
     try:
-        return Loans.objects.filter(
-            customer_id=data[f"{variable_search}"]).first()
-    except Loans.DoesNotExist:
+        payment_details_obj = PaymentsDetails.objects.filter(
+            payment_id=data[f"{variable_search}"],
+            )
+        payment_detail_list = []
+        for record in payment_details_obj:
+            payment_detail_list.append({
+                "loan_external_id": record.loan_id.external_id,
+                "payment_date": record.loan_id.created_at,
+                "status": record.payment_id.status,
+                'total_amount': record.payment_id.total_amount,
+                "payment_amount": record.amount
+            })
+        return payment_detail_list
+    except PaymentsDetails.DoesNotExist:
+        #FIXME probar que no se totee
         print("Loan not found")
-        return None
+        return [{}]
 
 
 def find_loan_variable_by_id(data, variable_search, variable_need) -> str:
