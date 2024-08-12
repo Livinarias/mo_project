@@ -46,7 +46,6 @@ class Context():
             for row in result:
                 external_id, status, score = row
                 try:
-                    print("ingreso aca")
                     Customers.objects.create(
                         external_id=external_id,
                         status=status,

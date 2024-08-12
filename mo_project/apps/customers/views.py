@@ -33,7 +33,6 @@ def validate_extension(extension_file: str, archivo: ByteString) -> None:
     """Method validate if extension is csv or txt to use strategy class"""
     context = Context(ConcreteStrategyCSV())
     if extension_file and extension_file == ExtensionFiles.CSV.value:
-        print("extension", extension_file)
         context.create_customer(archivo, extension_file)
         return True
     if extension_file and extension_file == ExtensionFiles.TXT.value:

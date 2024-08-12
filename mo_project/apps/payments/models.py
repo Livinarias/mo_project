@@ -10,7 +10,7 @@ class Payments(models.Model):
     updated_at = models.DateTimeField(blank=True, auto_now=True)
     external_id = models.CharField(max_length=60, unique=True, blank=False, null=False)
     total_amount = models.FloatField(blank=False, null=False)
-    status = models.SmallIntegerField(blank=False, null=False)
+    status = models.SmallIntegerField(blank=True, null=True)
     paid_at = models.DateTimeField(blank=True, auto_now=True)
     customer_id = models.ForeignKey(Customers, on_delete=models.CASCADE, verbose_name='Customer', null=False)
     historical = HistoricalRecords()

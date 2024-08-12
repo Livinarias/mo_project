@@ -12,13 +12,10 @@ def create_payments_api_view(request):
 
     if request.method == 'GET':
         payments = Payments.objects.all()
-        print("payments in api: %s"%payments)
         payments_serializer = PaymentSerializer(payments, many=True)
-        print("payments serializer: %s"%payments_serializer)
         return Response(payments_serializer.data, status=status.HTTP_200_OK)
     
     if request.method == 'POST':
-        print("request data:", request.data)
         payments_serializer = PaymentSerializerPost(data=request.data)
         if payments_serializer.is_valid():
             payments_serializer.save()
@@ -29,7 +26,7 @@ def create_payments_api_view(request):
 def get_payment_by_customer_view(request, pk):
 
     if request.method == 'GET':
-        customer_id = find_customer_by_external_id({'“loan_external_id”': pk}, '“loan_external_id”')
+        customer_id = find_customer_by_external_id({'external_id': pk}, 'external_id')
         payment = Payments.objects.filter(customer_id=customer_id)
         payment_serializer = PaymentSerializer(payment, many=True)
         return Response(payment_serializer.data, status=status.HTTP_200_OK)
