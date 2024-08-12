@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 
 from apps.customers.models import Customers
-from apps.customers.api.serializers import CustomerSerializer
+from apps.customers.api.serializers import CustomerSerializer, CustomerBalanceSerializer
 
 @api_view(['GET', 'POST'])
 def customers_api_view(request):
@@ -25,6 +25,14 @@ def customers_api_view(request):
 def customer_detail_view(request, pk):
 
     if request.method == 'GET':
-        customer = Customers.objects.filter(pk=pk).first()
+        customer = Customers.objects.filter(external_id=pk).first()
         customer_serializer = CustomerSerializer(customer)
+        return Response(customer_serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_balance_view(request, pk):
+
+    if request.method == 'GET':
+        customer = Customers.objects.filter(external_id=pk).first()
+        customer_serializer = CustomerBalanceSerializer(customer)
         return Response(customer_serializer.data, status=status.HTTP_200_OK)
