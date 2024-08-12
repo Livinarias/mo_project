@@ -15,6 +15,9 @@ class Payments(models.Model):
     customer_id = models.ForeignKey(Customers, on_delete=models.CASCADE, verbose_name='Customer', null=False)
     historical = HistoricalRecords()
 
+    def __str__(self):
+        return self.external_id
+
 
 class PaymentsDetails(models.Model):
     id = models.AutoField(primary_key=True)

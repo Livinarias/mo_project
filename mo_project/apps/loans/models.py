@@ -17,3 +17,6 @@ class Loans(models.Model):
     outstanding = models.FloatField(blank=False)
     customer_id = models.ForeignKey(Customers, on_delete=models.CASCADE, verbose_name='Customer', null=False)
     historical = HistoricalRecords()
+
+    def __str__(self) -> str:
+        return self.external_id
