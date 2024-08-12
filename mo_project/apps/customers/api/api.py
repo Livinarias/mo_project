@@ -1,10 +1,12 @@
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
+# from rest_framework.permissions import IsAuthenticated
 
 from apps.customers.models import Customers
 from apps.customers.api.serializers import CustomerSerializer
 
+# @permission_classes([IsAuthenticated])
 @api_view(['GET', 'POST'])
 def customers_api_view(request):
 
@@ -22,6 +24,7 @@ def customers_api_view(request):
         return Response(customers_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
 def customer_detail_view(request, pk):
 
     if request.method == 'GET':

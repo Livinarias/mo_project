@@ -35,7 +35,8 @@ LOCAL_APPS = [
 
 THIRD_APPS = [
     'rest_framework',
-    "rest_framework_simplejwt",
+    # "rest_framework.authtoken",
+    'rest_framework_simplejwt',
     'simple_history',
 ]
 
@@ -115,8 +116,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# settings.py
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
 }
