@@ -44,6 +44,14 @@ def find_loan_variable_by_id(data, variable_search, variable_need) -> str:
         print("Loan not found")
         return None
 
+def validation_status(status: str, loan: Loans) -> bool:
+    """method to validate status of loan"""
+    print("loan validation", loan.status)
+    if status == 3 and loan.status not in (3, 2, 4):
+        return False
+    if status == 4:
+        return False
+    return True
 
 
 """Utilitys to module Payments Details"""
