@@ -7,6 +7,7 @@ from apps.customers.api.serializers import CustomerSerializer, CustomerBalanceSe
 
 @api_view(['GET', 'POST'])
 def customers_api_view(request):
+    """api to view all customers and create a new customers"""
 
     if request.method == 'GET':
         customers = Customers.objects.all()
@@ -23,6 +24,7 @@ def customers_api_view(request):
 
 @api_view(['GET'])
 def customer_detail_view(request, pk):
+    """api to view customer by external id"""
 
     if request.method == 'GET':
         customer = Customers.objects.filter(external_id=pk).first()
@@ -31,6 +33,7 @@ def customer_detail_view(request, pk):
 
 @api_view(['GET'])
 def get_balance_view(request, pk):
+    """api to view customer balance by external id"""
 
     if request.method == 'GET':
         customer = Customers.objects.filter(external_id=pk).first()

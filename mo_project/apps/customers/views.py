@@ -39,3 +39,7 @@ def validate_extension(extension_file: str, archivo: ByteString) -> None:
         context.strategy = ConcreteStrategyTXT()
         context.create_customer(archivo, extension_file)
         return False
+
+def home_page(request):
+    """Method to render home page"""
+    return render(request, 'home.html')
