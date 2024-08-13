@@ -97,6 +97,39 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "create customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"external_id\": \"123s\",\r\n        \"status\": 1,\r\n        \"score\": 100000.0\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/customer/customer/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"customer",
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
