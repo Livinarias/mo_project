@@ -22,5 +22,5 @@ Por ultimo la tabla de pagos y detalles de pagos, me permite organizar los regis
 
 4. **Archivo importación para endpoints del proyecto en postman**
 
-    [endpoints](second_test/second_point.py)
+    Este archivo esta en la carpeta endpoints del proyecto
 
