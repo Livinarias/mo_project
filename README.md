@@ -20,7 +20,7 @@ Por ultimo la tabla de pagos y detalles de pagos, me permite organizar los regis
 
 3. [**Link del front-page**](https://startbootstrap.com/theme/creative)
 
-4. **Archivo importación para endpoints del proyecto**
+4. **Archivo importación para endpoints del proyecto en postman**
 
-    [descargar archivo](endpoints/MO Project.postman_collection.json)
+    [endpoints](second_test/second_point.py)
 
