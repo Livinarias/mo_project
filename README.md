@@ -7,7 +7,7 @@ Por ultimo la tabla de pagos y detalles de pagos, me permite organizar los regis
 
 ## Validaciones importantes:
 
-- los clientes se peuden crear con un endpoint o por medio de un arhcivo plano (.csv).
+- los clientes se pueden crear con un endpoint o por medio de un arhcivo plano (.csv).
 - el status del prestamo se modificara dependiendo de los calculos del programa.
 - existe un endpoint para ver el balance del cliente.
 - los detalles del pago se crean automaticamente ua vez se consuma el endpoint de pagos, al igual que actualizan el status y el outstanding del prestamo.
