@@ -4,6 +4,8 @@ from apps.payments.models import Payments, PaymentsDetails
 
 
 class AdminPayments(admin.ModelAdmin):
+    """class to admin payment model in django"""
+
     list_display = [
         'created_at', 
         'external_id',
@@ -26,6 +28,8 @@ admin.site.register(Payments, AdminPayments)
 
 
 class AdminPaymentDetails(admin.ModelAdmin):
+    """class to admin payment detail model in django"""
+
     list_display = [
         'created_at', 
         'amount',     

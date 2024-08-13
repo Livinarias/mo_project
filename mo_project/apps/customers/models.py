@@ -4,6 +4,8 @@ from simple_history.models import HistoricalRecords
 
 # Create your models here.
 class Customers(models.Model):
+    """class to model customers"""
+
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(blank=True, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, auto_now=True)

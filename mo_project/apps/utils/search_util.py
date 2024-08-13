@@ -6,7 +6,7 @@ from apps.payments.models import PaymentsDetails, Payments
 """Utilitys to module Customers"""
 
 
-def find_customer_variable_by_id(data, variable_search, variable_need) -> str:
+def find_customer_variable_by_id(data: list[dict], variable_search: str, variable_need: str) -> str:
     """method to return variable to customer filter by id"""
     try:
         return Customers.objects.filter(
@@ -17,7 +17,7 @@ def find_customer_variable_by_id(data, variable_search, variable_need) -> str:
         return None
 
 
-def find_customer_by_external_id(data, variable_search) -> Customers | None:
+def find_customer_by_external_id(data: list[dict], variable_search: str) -> Customers | None:
     """method to return instance to customer filter by external id"""
     try:
         return Customers.objects.get(
@@ -42,7 +42,7 @@ def find_total_debt(validated_data):
 """Utilitys to module Loans"""
 
 
-def find_payment_details_by_payment_id(data, variable_search) -> list[dict]:
+def find_payment_details_by_payment_id(data: list[dict], variable_search: str) -> list[dict]:
     """method to return instance to loan filter by external id"""
     try:
         payment_details_obj = PaymentsDetails.objects.filter(
@@ -64,7 +64,7 @@ def find_payment_details_by_payment_id(data, variable_search) -> list[dict]:
         return [{}]
 
 
-def find_loan_variable_by_id(data, variable_search, variable_need) -> str:
+def find_loan_variable_by_id(data: list[dict], variable_search: str, variable_need: str) -> str:
     """method to return variable to loan filter by id"""
     try:
         return Loans.objects.filter(
@@ -87,7 +87,7 @@ def validation_status(status: int, loan: Loans) -> bool:
 """Utilitys to module Payments"""
 
 
-def find_payment_detail_variable_by_payment_id(data, variable_search, variable_need) -> str:
+def find_payment_detail_variable_by_payment_id(data: list[dict], variable_search: str, variable_need: str) -> str:
     """method to return variable to payment detail filter by id"""
     try:
         return PaymentsDetails.objects.filter(
@@ -99,12 +99,14 @@ def find_payment_detail_variable_by_payment_id(data, variable_search, variable_n
 
 
 def active_credits(status: int) -> str:
+    """methos to validate status credit active"""
     if status != 2:
         return False
     return True
 
 
 def validate_amout_payment(validated_data: list[dict]) -> list[dict]:
+    """method to validate payment depend outstanding in loans by customer"""
     loans_list = []
     try:
         loans = Loans.objects.\
@@ -133,11 +135,13 @@ def validate_amout_payment(validated_data: list[dict]) -> list[dict]:
 
 
 def update_status_payment(instance: Payments, status: int) -> None:
+    """Methos to update status in payment"""
     instance.status = status
     instance.save()
 
 
 def update_loans_records(payment_detail_list: list[dict]) -> None:
+    """method to update fields in loads records"""
     for item in payment_detail_list:
         item['loan_id'].outstanding -= item['amount']
         item['loan_id'].status = 4 if item['loan_id'].\

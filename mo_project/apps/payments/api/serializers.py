@@ -19,7 +19,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        print("data_to_representation: ", data)
+        print("data: ", data)
         data = {
             'external_id': data['external_id'],
             'customer_external_id': find_customer_variable_by_id(
@@ -43,6 +43,7 @@ class PaymentSerializerPost(serializers.ModelSerializer):
         fields = ('external_id', 'customer_external_id', 'payment_amount')
 
     def create(self, validated_data):
+        """override create method to organice structure"""
         customer_id = find_customer_by_external_id(
             validated_data, 'customer_external_id')
         validated_data.pop('customer_external_id')
@@ -61,6 +62,7 @@ class PaymentSerializerPost(serializers.ModelSerializer):
         return payment_record
 
     def create_payment_detail(self, validated_data):
+        """Create a payment detail"""
         payment_detail_list, status = validate_amout_payment(validated_data)
         if len(payment_detail_list) > 0:
             PaymentsDetails.\

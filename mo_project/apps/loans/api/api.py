@@ -10,6 +10,7 @@ from apps.utils.search_util import find_customer_by_external_id, validation_stat
 
 @api_view(['GET', 'POST'])
 def create_loans_api_view(request):
+    """api to view all loans and create a new loans"""
 
     if request.method == 'GET':
         loans = Loans.objects.all()
@@ -26,6 +27,7 @@ def create_loans_api_view(request):
 
 @api_view(['GET'])
 def get_loan_by_customer_view(request, pk):
+    """api to get loans by customer"""
 
     if request.method == 'GET':
         customer_id = find_customer_by_external_id({'customer_external_id': pk}, 'customer_external_id')
@@ -35,6 +37,7 @@ def get_loan_by_customer_view(request, pk):
 
 @api_view(['PATCH'])
 def active_loan_api_view(request, pk):
+    """api to update loan status"""
 
     if request.method == 'PATCH':
 

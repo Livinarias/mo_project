@@ -11,7 +11,6 @@ class LoansSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        print("data: {}".format(data))
         customer_external_id = find_customer_variable_by_id(data, 'customer_id', 'external_id')
         data = {
             'external_id': data['external_id'],
@@ -36,7 +35,7 @@ class LoansSerializerPost(serializers.ModelSerializer):
             )
         
     def create(self, validated_data):
-        print("create: ", validated_data)
+        """method to override create for organice and create validations"""
         customer_id = find_customer_by_external_id(validated_data, 'customer_external_id')
         validated_data.pop('customer_external_id')
         if customer_id.score >= validated_data['amount']:

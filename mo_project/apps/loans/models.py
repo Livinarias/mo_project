@@ -5,6 +5,8 @@ from apps.customers.models import Customers
 
 # Create your models here.
 class Loans(models.Model):
+    """class to model loans"""
+
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(blank=True, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, auto_now=True)

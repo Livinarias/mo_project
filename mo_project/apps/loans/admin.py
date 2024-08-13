@@ -4,6 +4,8 @@ from apps.loans.models import Loans
 
 
 class AdminLoans(admin.ModelAdmin):
+    """class to admin loans model in django"""
+
     list_display = [
         'created_at', 
         'external_id',
